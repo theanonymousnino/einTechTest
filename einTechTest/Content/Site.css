@@ -1,0 +1,46 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+input,
+select,
+textarea {
+    max-width: 280px;
+    border-radius: 5px;
+}
+
+td > input,
+td > select,
+td > textarea {
+    background: #525252;
+    color: #ddd;
+}
+
+table, th, td {
+      border: 1px solid black;
+      background: #333;
+      color: #ddd;
+}
+
+th {
+    background: #428bca;
+    border: 1px solid #357ebd;
+}
+
+.table thead {
+    border-bottom: 10px solid red;
+}
+
+body {
+    /*background: #ddd;*/
+}

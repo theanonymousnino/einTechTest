@@ -1,0 +1,76 @@
+﻿@using System.Web.Optimization;
+@model IEnumerable<einTechTest.Models.PersonModel>
+
+@{
+    ViewBag.Title = "Various People";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<input type="hidden" id="serverJSON" value="@Newtonsoft.Json.JsonConvert.SerializeObject(Model)" />
+<input type="hidden" id="serverJSONGroups" value="@Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Groups)" />
+
+<p>
+    Group: <select data-bind="options: $root.filterdGroups, optionsText: 'Name', value: filterGroup"></select>
+    Name: <input data-bind="value: filter, valueUpdate: 'afterkeydown'" />
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Date Added
+        </th>
+        <th>
+            Group Name
+        </th>
+        <th></th>
+    </tr>
+    <tbody data-bind="foreach: filterdPersonList">
+        <tr data-bind="template: { name: Mode, data: $data }"></tr>
+    </tbody>
+</table>
+
+<p data-bind="template: { name: !filter() && (filterGroup().ID == -1) ? 'unfilterd' : 'filterd' }"></p>
+
+<script type="text/html" id="filterd">
+</script>
+
+<script type="text/html" id="unfilterd">
+    <button class="btn btn-primary" id="create">Create</button>
+</script>
+
+<script type="text/html" id="filterdEdit">
+    <button class="btn btn-danger kout-delete" data-bind="click: Delete">Delete</button>
+</script>
+
+<script type="text/html" id="unfilterdEdit">
+    <button class="btn btn-success kout-edit" data-bind="click: Edit">Edit</button>
+    <button class="btn btn-danger kout-delete" data-bind="click: Delete">Delete</button>
+</script>
+
+<script type="text/html" id="display">
+    <td data-bind="text: ID"></td>
+    <td data-bind="text: Name"></td>
+    <td data-bind="text: DateAdded"></td>
+    <td data-bind="text: Group().Name"></td>
+    <td data-bind="template: { name: !$root.filter() && ($root.filterGroup().ID == -1) ? 'unfilterdEdit' : 'filterdEdit' }"></td>
+</script>
+
+<script type="text/html" id="edit">
+    <td data-bind="text: ID"></td>
+    <td><input type="text" data-bind="value: Name" /></td>
+    <td data-bind="text: DateAdded"></td>
+    <td>
+        <select data-bind="options: $root.groups, optionsText: 'Name', value: Group"></select>
+    </td>
+    <td>
+        <button class="btn btn-success kout-save" data-bind="click: Update">Update</button>
+        <button class="btn btn-danger kout-cancel" data-bind="click: Cancel">Cancel</button>
+    </td>
+</script>
